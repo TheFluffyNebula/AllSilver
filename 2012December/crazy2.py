@@ -1,7 +1,7 @@
-# some runtime errors (bad polygon init)
+# fixing runtime errors
 import sys
 sys.stdin = open("crazy.in")
-# sys.stdout = open("crazy.out", 'w')
+sys.stdout = open("crazy.out", 'w')
 input = sys.stdin.readline
 from collections import defaultdict, Counter
 
@@ -13,12 +13,13 @@ for i in range(1, n + 1):
     x1, y1, x2, y2 = map(int, input().split())
     segments.append((x1, y1, x2, y2))
     if ptsToIdx[(x1, y1)] == 0:
-        ptsToIdx[(x1, y1)] = i
-        idxToPts[i] = (x1, y1)
-    else:
-        ptsToIdx[(x2, y2)] = i
-        idxToPts[i] = (x2, y2)
+        ptsToIdx[(x1, y1)] = len(ptsToIdx)
+        idxToPts[len(ptsToIdx)] = (x1, y1)
+    if ptsToIdx[(x2, y2)] == 0:
+        ptsToIdx[(x2, y2)] = len(ptsToIdx)
+        idxToPts[len(ptsToIdx)] = (x2, y2)
 # print(segments)
+# print(idxToPts)
 
 adj = {i: [] for i in range(n)}
 for segment in segments:
@@ -27,6 +28,7 @@ for segment in segments:
     a, b = a - 1, b - 1
     adj[a].append(b)
     adj[b].append(a)
+# print(adj)
 
 visited = [False] * n
 def dfs(i):
@@ -96,5 +98,5 @@ print(max(Counter(shapeStatus).values()))
     innermost polygon --> least area of those in, shoelace theorem
 2. ans = max(shapes)
 
-point in polygon... will be trying the "ray tracing algorithm"
+point in polygon... copied the "ray tracing algorithm"
 '''
