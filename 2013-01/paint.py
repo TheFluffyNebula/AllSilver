@@ -1,6 +1,6 @@
 import sys
 sys.stdin = open("paint.in")
-# sys.stdout = open("paint.out", 'w')
+sys.stdout = open("paint.out", 'w')
 input = sys.stdin.readline
 from collections import defaultdict
 
