@@ -28,10 +28,11 @@ while x <= n:
     x *= 2
 # print(tables)
 
+# probably faster (and true linear) to precompute all log2 values up to n (max segment length)
 def f(L, R):
     # inclusive range
     numsInSegment = R - L + 1
-    power = math.floor(math.log2(R - L))
+    power = math.floor(math.log2(numsInSegment))
     return max(tables[power][L], tables[power][L + (numsInSegment - 2 ** power)])
 
 ans = 0
@@ -49,14 +50,12 @@ for i in range(n):
             if rPtr == n - 1:
                 break
     # print(lPtr, rPtr)
-    # prevent log2(0) --> domain error
-    if lPtr < i and i < rPtr:
-        leftMax = f(lPtr, i)
-        rightMax = f(i, rPtr)
+    leftMax = f(lPtr, i)
+    rightMax = f(i, rPtr)
 
-        if leftMax >= 2 * cows[i][1] and rightMax >= 2 * cows[i][1]:
-            # print(i)
-            ans += 1
+    if leftMax >= 2 * cows[i][1] and rightMax >= 2 * cows[i][1]:
+        # print(i)
+        ans += 1
 print(ans)
 '''
 trying the sparse table implementation!
