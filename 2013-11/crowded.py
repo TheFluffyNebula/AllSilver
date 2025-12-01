@@ -1,7 +1,6 @@
 import sys
 sys.stdin = open("crowded.in")
 sys.stdout = open("crowded.out", 'w')
-from collections import deque
 import math
 
 n, d = map(int, input().split())
@@ -36,7 +35,6 @@ def f(L, R):
     return max(tables[power][L], tables[power][L + (numsInSegment - 2 ** power)])
 
 ans = 0
-window = deque()
 lPtr = 0
 rPtr = 0
 for i in range(n):
