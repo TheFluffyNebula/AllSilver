@@ -11,7 +11,7 @@ loc, pts = map(list, zip(*targets))
 
 dp = [[0 for _ in range(1010)] for _ in range(1010)]
 result = 0
-for ii in range(3):
+for ii in range(2):
     for i in range(n - 1, -1, -1):
         k = n
         val = 0
