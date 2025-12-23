@@ -1,3 +1,4 @@
+# 5/10, WA
 import sys
 sys.stdin = open("fairphoto.in")
 # sys.stdout = open("fairphoto.out", 'w')
