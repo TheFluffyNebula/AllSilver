@@ -1,6 +1,7 @@
+# idk what I did wrong here, will try to debug later
 import sys
 sys.stdin = open("lightson.in")
-# sys.stdout = open("lightson.out", 'w')
+sys.stdout = open("lightson.out", 'w')
 from collections import defaultdict, deque
 
 n, m = map(int, input().split())
@@ -20,7 +21,7 @@ while q:
     uX, uY = q.popleft()    
     for lightX, lightY in switches[(uX, uY)]:
         if not allowed[lightX][lightY]:
-            print(lightX, lightY)
+            # print(lightX, lightY)
             allowed[lightX][lightY] = True
             c += 1
     for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
@@ -34,9 +35,12 @@ while q:
             q.append((vX, vY))
             for lightX, lightY in switches[(vX, vY)]:
                 if not allowed[lightX][lightY]:
-                    print(lightX, lightY)
+                    # print(lightX, lightY)
                     allowed[lightX][lightY] = True
                     c += 1
+                    # apparently adding this one line gets it working
+                    # hmm, not quite
+                    q.append((lightX, lightY))
 print(c)
 
 '''
